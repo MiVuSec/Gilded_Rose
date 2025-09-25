@@ -72,12 +72,12 @@ test("The Quality of an item is never more than 50", () => {
 })
 
 test("'Sulfuras', being a legendary item, never has to be sold or decreases in Qualitys", () => {
-  let agedBrie = new LegendaryItem("Sulfuras, Hand of Ragnaros", 0, 50);
-  const gildedRose = new Shop([agedBrie]);
+  let legendary = new LegendaryItem("Sulfuras, Hand of Ragnaros", 0, 50);
+  const gildedRose = new Shop([legendary]);
 
   const items = gildedRose.updateQuality();
 
-  expect(items[0].quality).toBe(50);
+  expect(items[0].quality).toBe(80);
 })
 describe('Backstage passes, like aged brie, increases in Quality as its SellIn value approaches Quality increases by 2 when there are 10 days or less and by 3 when there are 5 days or less but Quality drops to 0 after the concert"', () => {
   test("by 3 when there are 5 days or less", () => {
@@ -90,8 +90,8 @@ describe('Backstage passes, like aged brie, increases in Quality as its SellIn v
   })
 
   test("Quality increases by 2 when there are 10 days or less", () => {
-    let agedBrie = new Item("Backstage passes to a TAFKAL80ETC concert", 9, 1);
-    const gildedRose = new Shop([agedBrie]);
+    let backstagePass = new Item("Backstage passes to a TAFKAL80ETC concert", 9, 1);
+    const gildedRose = new Shop([backstagePass]);
 
     const items = gildedRose.updateQuality();
 
@@ -115,4 +115,5 @@ test("Conjured items degrade in Quality twice as fast as normal items", () => {
   const items = gildedRose.updateQuality();
 
   expect(items[0] instanceof ConjuredItem).toBe(true);
+  expect(items[0].quality).toBe(46);
 })
