@@ -30,9 +30,6 @@ class Shop {
         case item.name.includes('Aged Brie') :
           const agedBrie = item;
           agedBrie.quality += sellByDays <= 0 ? 2 : 1;
-          if (agedBrie.quality > 50) {
-            agedBrie.quality = 50;
-          }
           break;
         case item.name.includes('Backstage passes') : 
           const backstagePasses = item;
@@ -45,20 +42,17 @@ class Shop {
               sellByDays <= 10 ? 2 :
               1
           }
-          if (backstagePasses.quality > 50) {
-            backstagePasses.quality = 50;
-          }
           break;
         default :
           if (item.quality > 0) {
             item.quality -= (item instanceof ConjuredItem ? 2 : 1) * (sellByDays <= 0 ? 2 : 1);
-            if (item.quality > 50) {
-              item.quality = 50;
-            }
           }
-          if (item instanceof LegendaryItem) {
-            item.quality = 80;
-          }
+      }
+      if (item.quality > 50) {
+        item.quality = 50;
+      }
+      if (item instanceof LegendaryItem) {
+        item.quality = 80;
       }
     })
 
